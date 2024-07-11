@@ -1,21 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectSearchResults } from "../store/features/postsSlice";
+import Feed from "./Feed";
 
-const Home = () => {
-  const searchResults = useSelector(selectSearchResults);
+const Home = ({ posts }) => {
   return (
     <main className="Home">
-      {searchResults.length ? (
-        searchResults.map((post) => (
-          <article key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.datetime}</p>
-            <p>{post.body}</p>
-          </article>
-        ))
+      {posts.length ? (
+        <Feed posts={posts} />
       ) : (
-        <p>No posts to display</p>
+        <p style={{ marginTop: "2rem" }}>No posts to display.</p>
       )}
     </main>
   );

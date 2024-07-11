@@ -1,30 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addPost } from "../store/features/postsSlice";
-import { format } from "date-fns";
-
-const NewPost = () => {
-  const [postTitle, setPostTitle] = useState("");
-  const [postBody, setPostBody] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const id = Date.now();
-    const datetime = format(new Date(), "MMMM dd, yyyy pp");
-    const newPost = { id, title: postTitle, datetime, body: postBody };
-    dispatch(addPost(newPost));
-    setPostTitle("");
-    setPostBody("");
-    navigate("/");
-  };
-
+const NewPost = ({
+  handleSubmit,
+  postTitle,
+  setPostTitle,
+  postBody,
+  setPostBody,
+}) => {
   return (
     <main className="NewPost">
       <h2>New Post</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="newPostForm" onSubmit={handleSubmit}>
         <label htmlFor="postTitle">Title:</label>
         <input
           id="postTitle"
